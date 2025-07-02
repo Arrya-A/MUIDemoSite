@@ -1,8 +1,24 @@
 import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import image from "../images/bg-removebg-preview.png";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const registerSchema = yup.object().shape({
+  username: yup.string().required("Username is required"),
+  email: yup.string().required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
 
 const Register = () => {
+  const {
+    register,
+    onSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(registerSchema),
+  });
   return (
     <Box
       sx={{
@@ -37,9 +53,30 @@ const Register = () => {
           >
             <Stack spacing={2} sx={{ width: "400px" }}>
               <Typography>Sign Up</Typography>
-              <TextField label="Username" variant="outlined" fullWidth />
-              <TextField label="Email" variant="outlined" fullWidth />
-              <TextField label="Password" variant="outlined" fullWidth />
+              <TextField
+                label="Username"
+                variant="outlined"
+                fullWidth
+                {...register("username")}
+                error={!!errors?.username}
+                helperText={errors?.username?.message}
+              />
+              <TextField
+                label="Email"
+                variant="outlined"
+                fullWidth
+                {...register("email")}
+                error={!!errors?.email}
+                helperText={errors?.email?.message}
+              />
+              <TextField
+                label="Password"
+                variant="outlined"
+                fullWidth
+                {...register("password")}
+                error={!!errors?.password}
+                helperText={errors?.password?.message}
+              />
               <Button variant="contained">Sign Up</Button>
               <Typography>
                 Already a user? Sign in <Link to={"/"}>here</Link>
