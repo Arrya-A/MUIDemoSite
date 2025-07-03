@@ -43,12 +43,11 @@ const Login = () => {
               item
               xs={12}
               md={6}
-              lg={6}
               sx={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                p: 3,
+                p: { xs: 3, md: 0 },
               }}
             >
               <Stack spacing={2} sx={{ width: "400px" }}>
