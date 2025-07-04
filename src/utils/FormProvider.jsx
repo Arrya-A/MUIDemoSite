@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
-// form
 import { FormProvider as Form } from "react-hook-form";
 
-// ----------------------------------------------------------------------
 
 FormProvider.propTypes = {
   children: PropTypes.node.isRequired,
@@ -10,7 +8,8 @@ FormProvider.propTypes = {
   onSubmit: PropTypes.func,
 };
 
-export default function FormProvider({ children, onSubmit, methods }) {
+
+export default function FormProvider({ children, methods, onSubmit }) {
   return (
     <Form {...methods}>
       <form onSubmit={onSubmit}>{children}</form>
