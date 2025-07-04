@@ -22,12 +22,13 @@ const loginSchema = yup.object().shape({
 const Login = () => {
   const { loginUser } = useAuth();
   const navigate = useNavigate();
-  const [loginError, setLoginError]= useState("")
+  const [loginError, setLoginError] = useState("");
 
   const methods = useForm({
     defaultValues,
     resolver: yupResolver(loginSchema),
   });
+  
   const {
     register,
     handleSubmit,
@@ -37,21 +38,21 @@ const Login = () => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      setLoginError("")
+      setLoginError("");
       await loginUser(data);
       const token = localStorage.getItem("accessToken");
       if (token) {
         toast.success("Login successful");
         console.log("login successful");
-        
+
         navigate("/dummy");
       } else {
-        setLoginError("Invalid Credentials")
+        setLoginError("Invalid Credentials");
         toast.error("Login failed");
       }
     } catch (err) {
       console.log(err);
-       toast.error("An unexpected error occurred");
+      toast.error("An unexpected error occurred");
     }
   };
 
@@ -89,7 +90,7 @@ const Login = () => {
               }}
             >
               <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={2}>
+                <Stack spacing={2}  sx={{ width: "400px" }}>
                   <Typography variant="h6">Sign In</Typography>
                   <TextField
                     label="Email"
@@ -116,17 +117,12 @@ const Login = () => {
                 </Stack>
               </FormProvider>
             </Grid>
-            <Grid item xs={12} md={6} lg={6}>
+            <Grid item xs={12} md={6} >
               <img src={image} height="100%" width="100%" />
             </Grid>
           </Grid>
         </Box>
       </Box>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        transition={Bounce}
-      />
     </>
   );
 };
