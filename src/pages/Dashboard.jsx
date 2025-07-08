@@ -1,7 +1,12 @@
-import React from "react";
+import { Typography } from '@mui/material'
+import React from 'react'
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
-};
+  return (
+    <>
+      <Typography variant='h4'>dashboard</Typography>
+    </>
+  )
+}
 
-export default Dashboard;
+export default Dashboard

@@ -6,7 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import FormProvider from "../utils/FormProvider";
 import useAuth from "./hook/useAuth";
-import { Bounce, ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 
@@ -47,7 +46,7 @@ const Login = () => {
         enqueueSnackbar("Login successful", { variant: "success" });
         console.log("login successful");
 
-        navigate("/dummy");
+        navigate("/home");
       } else {
         setLoginError("Invalid Credentials");
         enqueueSnackbar("Login failed", { variant: "error" });
