@@ -8,6 +8,7 @@ import FormProvider from "../utils/FormProvider";
 import useAuth from "./hook/useAuth";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
+import { useSnackbar } from "notistack";
 
 const defaultValues = {
   email: "",
@@ -20,6 +21,7 @@ const loginSchema = yup.object().shape({
 });
 
 const Login = () => {
+  const {enqueueSnackbar}= useSnackbar()
   const { loginUser } = useAuth();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
@@ -28,7 +30,7 @@ const Login = () => {
     defaultValues,
     resolver: yupResolver(loginSchema),
   });
-  
+
   const {
     register,
     handleSubmit,
@@ -42,17 +44,17 @@ const Login = () => {
       await loginUser(data);
       const token = localStorage.getItem("accessToken");
       if (token) {
-        toast.success("Login successful");
+        enqueueSnackbar("Login successful", {variant:"success"});
         console.log("login successful");
 
         navigate("/dummy");
       } else {
         setLoginError("Invalid Credentials");
-        toast.error("Login failed");
+        enqueueSnackbar("Login failed",{variant:"error"});
       }
     } catch (err) {
       console.log(err);
-      toast.error("An unexpected error occurred");
+      enqueueSnackbar("An unexpected error occurred",{variant:"error"});
     }
   };
 
@@ -86,11 +88,16 @@ const Login = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                p: { xs: 3, md: 0 },
+                p: 3,
               }}
             >
               <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={2}  sx={{ width: "400px" }}>
+                <Stack
+                  spacing={2}
+                  sx={{
+                    width: { xs: "100%", sm: "400px" },
+                  }}
+                >
                   <Typography variant="h6">Sign In</Typography>
                   <TextField
                     label="Email"
@@ -117,7 +124,7 @@ const Login = () => {
                 </Stack>
               </FormProvider>
             </Grid>
-            <Grid item xs={12} md={6} >
+            <Grid item xs={12} md={6}>
               <img src={image} height="100%" width="100%" />
             </Grid>
           </Grid>
