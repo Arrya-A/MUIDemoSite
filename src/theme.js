@@ -3,8 +3,7 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      // main: "#10B981", // your global button color
-      main:"#02B397"
+      main: "#02B397", // your global button color
     },
   },
   components: {

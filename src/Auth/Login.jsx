@@ -21,7 +21,7 @@ const loginSchema = yup.object().shape({
 });
 
 const Login = () => {
-  const {enqueueSnackbar}= useSnackbar()
+  const { enqueueSnackbar } = useSnackbar();
   const { loginUser } = useAuth();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
@@ -44,17 +44,17 @@ const Login = () => {
       await loginUser(data);
       const token = localStorage.getItem("accessToken");
       if (token) {
-        enqueueSnackbar("Login successful", {variant:"success"});
+        enqueueSnackbar("Login successful", { variant: "success" });
         console.log("login successful");
 
         navigate("/dummy");
       } else {
         setLoginError("Invalid Credentials");
-        enqueueSnackbar("Login failed",{variant:"error"});
+        enqueueSnackbar("Login failed", { variant: "error" });
       }
     } catch (err) {
       console.log(err);
-      enqueueSnackbar("An unexpected error occurred",{variant:"error"});
+      enqueueSnackbar("An unexpected error occurred", { variant: "error" });
     }
   };
 

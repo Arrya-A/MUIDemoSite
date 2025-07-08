@@ -1,9 +1,5 @@
 const Dummy = () => {
-  return (
-    <div>
-        ghu
-    </div>
-  )
-}
+  return <div>ghu</div>;
+};
 
-export default Dummy
+export default Dummy;
