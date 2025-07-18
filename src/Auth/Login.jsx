@@ -23,7 +23,6 @@ const Login = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { loginUser } = useAuth();
   const navigate = useNavigate();
-  const [loginError, setLoginError] = useState("");
 
   const methods = useForm({
     defaultValues,
@@ -39,7 +38,6 @@ const Login = () => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      setLoginError("");
       await loginUser(data);
       const token = localStorage.getItem("accessToken");
       if (token) {
@@ -48,8 +46,7 @@ const Login = () => {
 
         navigate("/home");
       } else {
-        setLoginError("Invalid Credentials");
-        enqueueSnackbar("Login failed", { variant: "error" });
+        enqueueSnackbar("Invalid Credentials", { variant: "error" });
       }
     } catch (err) {
       console.log(err);
